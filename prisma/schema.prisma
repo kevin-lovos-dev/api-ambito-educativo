@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  role      String   @default("ADMIN")
+  createdAt DateTime @default(now())
+}
+
+model Student {
+  id                   Int      @id @default(autoincrement())
+  nombreEstudiante     String
+  anioInicio           Int
+  anioFin              Int?
+  promedioGraduacion   Float?
+  promedioActual       Float?
+  centroEscolar        String
+  NUE                  String   @unique
+  estado               Estado
+  createdAt            DateTime @default(now())
+}
+
+enum Estado {
+  activo
+  graduado
+}
